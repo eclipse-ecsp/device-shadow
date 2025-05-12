@@ -1,0 +1,14 @@
+{
+  "version": "1.1",
+  "domain": "geofence",
+  "command": "delete",
+  "timestamp": 1474932281430,
+  "data": [
+    {
+      "geofenceId": "asdasd-3dfwefsdf-32432asdas-das234"
+    },
+    {
+      "geofenceId": "qweqwqw-123wqqs-qweq23-das234"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "version": "1.0",
+  "domain": "speedLimitAlert",
+  "command": "put",
+  "data": {
+    "limit": 80
+  }
+}

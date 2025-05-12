@@ -1,0 +1,98 @@
+[
+  {
+    "version": "1.0",
+    "domain": "speedLimitAlert",
+    "command": "put",
+    "data": {
+      "limit": 80
+    }
+  },
+  {
+    "version": "1.1",
+    "domain": "geofence",
+    "command": "delete",
+    "timestamp": 1474932281430,
+    "data": [
+      {
+        "geofenceId": "asdasd-3dfwefsdf-32432asdas-das234"
+      },
+      {
+        "geofenceId": "qweqwqw-123wqqs-qweq23-das234"
+      }
+    ]
+  },
+  {
+    "version": "1.0",
+    "domain": "curfewAlert",
+    "command": "put",
+    "timestamp": 1474932281431,
+    "data": {
+      "monday": [
+        [
+          "14:00",
+          "15:00"
+        ],
+        [
+          "18:00",
+          "20:00"
+        ]
+      ],
+      "tuesday": [
+        [
+          "14:00",
+          "15:00"
+        ],
+        [
+          "18:00",
+          "20:00"
+        ]
+      ],
+      "wednesday": [
+        [
+          "14:00",
+          "15:00"
+        ],
+        [
+          "18:00",
+          "20:00"
+        ]
+      ],
+      "thursday": [
+        [
+          "14:00",
+          "15:00"
+        ],
+        [
+          "18:00",
+          "20:00"
+        ]
+      ],
+      "friday": [
+        [
+          "14:00",
+          "15:00"
+        ],
+        [
+          "18:00",
+          "20:00"
+        ]
+      ],
+      "saturday": [
+        [
+          "14:00",
+          "15:00"
+        ],
+        [
+          "18:00",
+          "20:00"
+        ]
+      ],
+      "sunday": [
+        [
+          "00:00",
+          "23:59"
+        ]
+      ]
+    }
+  }
+]

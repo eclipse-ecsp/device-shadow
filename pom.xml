@@ -1,0 +1,576 @@
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ /********************************************************************************
+  ~
+  ~  * Copyright (c) 2023-24 Harman International
+  ~
+  ~  *
+  ~
+  ~  * Licensed under the Apache License, Version 2.0 (the "License");
+  ~
+  ~  * you may not use this file except in compliance with the License.
+  ~
+  ~  * You may obtain a copy of the License at
+  ~
+  ~  *
+  ~
+  ~  *  http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  *     
+  ~
+  ~  * Unless required by applicable law or agreed to in writing, software
+  ~
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~
+  ~  * See the License for the specific language governing permissions and
+  ~
+  ~  * limitations under the License.
+  ~
+  ~  *
+  ~
+  ~  * SPDX-License-Identifier: Apache-2.0
+  ~
+  ~  ********************************************************************************/
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.eclipse.ecsp</groupId>
+    <artifactId>device-shadow</artifactId>
+    <version>0.1.0</version>
+
+    <name>device-shadow</name>
+    <description>Device shadow library for ECSP project</description>
+    <url>https://github.com/eclipse-ecsp/device-shadow</url>
+
+    <licenses>
+        <license>
+            <name>Apache-2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:https://github.com/eclipse-ecsp/device-shadow.git</connection>
+        <url>https://github.com/eclipse-ecsp/device-shadow</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <developers>
+        <developer>
+            <id>dileephemachandranharman</id>
+            <name>Dileep Hemachandran</name>
+            <email>dileep.hemachandran@harman.com</email>
+        </developer>
+    </developers>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/eclipse-ecsp/device-shadow/issues</url>
+    </issueManagement>
+
+    <organization>
+        <url>https://github.com/eclipse-ecsp</url>
+        <name>eclipse-ecsp</name>
+    </organization>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+        <maven.failsafe.plugin.version>2.18.1</maven.failsafe.plugin.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
+
+        <sqlite4java.version>1.0.392</sqlite4java.version>
+
+        <maven.resources.version>2.7</maven.resources.version>
+        <packaging.scope>provided</packaging.scope>
+        <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco-ut/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.java.source>17</sonar.java.source>
+        <sonar.language>java</sonar.language>
+        <sonar.exclusions>
+            src/main/java/com/harman/device/shadow/entities/Configuration.java,
+            src/main/java/com/harman/device/shadow/AuthenticationException.java,
+            src/main/java/com/harman/device/shadow/AuthorizationException.java,
+            src/main/java/com/harman/device/shadow/NoSuchEntityException.java,
+            src/main/java/com/harman/device/shadow/commons/util/*.java,
+            src/main/java/com/harman/device/shadow/commons/constants/DeviceConfigConstants.java,
+            src/main/java/com/harman/device/shadow/commons/condition/*.java
+        </sonar.exclusions>
+        <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec
+        </jacoco.ut.execution.data.file>
+        <!-- added by SA -->
+        <spring.version>5.3.34</spring.version>
+        <spring.boot.version>2.7.18</spring.boot.version>
+        <stream.base.version>1.0.0</stream.base.version>
+        <dao.version>1.1.1</dao.version>
+        <entities.version>1.1.1</entities.version>
+        <utils.version>1.1.1</utils.version>
+        <logback.version>1.2.13</logback.version>
+        <puppycrawl.version>10.13.3</puppycrawl.version>
+        <java.compiler.version>17</java.compiler.version>
+        <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
+        <cyclonedx-maven-plugin.version>2.7.10</cyclonedx-maven-plugin.version>
+        <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+        <release.plugin.version>2.5.3</release.plugin.version>
+        <war.plugin.version>3.3.1</war.plugin.version>
+        <surefire.plugin.version>2.21.0</surefire.plugin.version>
+        <jacoco.plugin.version>0.8.10</jacoco.plugin.version>
+        <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+        <!-- added by SA -->
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.eclipse.ecsp</groupId>
+                <artifactId>device-shadow-entities</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.ecsp</groupId>
+                <artifactId>device-shadow-commons</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- Ignite Common Library Dependencies-->
+            <dependency>
+                <!-- https://mvnrepository.com/artifact/org.eclipse.ecsp/entities -->
+                <groupId>org.eclipse.ecsp</groupId>
+                <artifactId>entities</artifactId>
+                <version>${entities.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.ecsp</groupId>
+                <artifactId>nosql-dao</artifactId>
+                <version>${dao.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.eclipse.ecsp</groupId>
+                        <artifactId>entities</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Third party jar dependencies-->
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.9</version>
+            </dependency>
+            <dependency>
+                <groupId>com.hazelcast</groupId>
+                <artifactId>hazelcast</artifactId>
+                <version>5.3.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.26.0</version>
+            </dependency>
+            <!-- test dependencies-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.flapdoodle.embed</groupId>
+                <artifactId>de.flapdoodle.embed.mongo</artifactId>
+                <version>2.1.1</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-compress</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>io.moquette</groupId>
+                <artifactId>moquette-broker</artifactId>
+                <version>0.10</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.kstyrc</groupId>
+                <artifactId>embedded-redis</artifactId>
+                <version>0.6</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <!-- https://mvnrepository.com/artifact/org.eclipse.ecsp/utils -->
+                <groupId>org.eclipse.ecsp</groupId>
+                <artifactId>utils</artifactId>
+                <version>${utils.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- added by SA -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <!-- added by SA -->
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.sonarsource.scanner.maven</groupId>
+                    <artifactId>sonar-maven-plugin</artifactId>
+                    <version>${sonar-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.compiler.version}</source>
+                        <target>${java.compiler.version}</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.cyclonedx</groupId>
+                    <artifactId>cyclonedx-maven-plugin</artifactId>
+                    <version>${cyclonedx-maven-plugin.version}</version>
+                    <configuration>
+                        <projectType>application</projectType>
+                        <schemaVersion>1.5</schemaVersion>
+                        <includeBomSerialNumber>true</includeBomSerialNumber>
+                        <includeCompileScope>true</includeCompileScope>
+                        <includeProvidedScope>true</includeProvidedScope>
+                        <includeRuntimeScope>true</includeRuntimeScope>
+                        <includeSystemScope>true</includeSystemScope>
+                        <includeTestScope>true</includeTestScope>
+                        <includeLicenseText>true</includeLicenseText>
+                        <outputFormat>all</outputFormat>
+                        <outputDirectory>${project.basedir}/sbom</outputDirectory>
+                        <verbose>false</verbose>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>makeAggregateBom</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.6</version>
+                    <configuration>
+                        <attachClasses>true</attachClasses>
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+
+                    <configuration>
+                        <!--                    // To enable test classes-->
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <!--                    // we can use this instead of above property <checkstyle.config.location>-->
+                    </configuration>
+
+                    <executions>
+                        <execution>
+                            <id>validate</id>
+                            <phase>validate</phase>
+                            <configuration>
+                                <consoleOutput>true</consoleOutput>
+                                <failsOnError>true</failsOnError>
+                                <outputFileFormat>xml</outputFileFormat>
+                                <failsOnError>true</failsOnError>
+                                <failOnViolation>true</failOnViolation>
+                                <violationSeverity>warning</violationSeverity>
+                                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                                <includeResources>true</includeResources>
+                                <includeTestResources>true</includeTestResources>
+                            </configuration>
+                            <goals>
+                                <goal>checkstyle</goal>
+                                <!--                            // to only check please use the below goal. With mvn clean install, the check goal will run and with above configuration, the build will fail if there are any checkstyle violations.-->
+                                <!--                            //  <goal>check</goal>-->
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <!--                    // need to add below dependency to get validated against latest rules from check style.-->
+                        <dependency>
+                            <groupId>com.puppycrawl.tools</groupId>
+                            <artifactId>checkstyle</artifactId>
+                            <version>${puppycrawl.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>org.eclipse.dash</groupId>
+                    <artifactId>license-tool-plugin</artifactId>
+                    <version>1.1.0</version>
+                    <configuration>
+                        <includeScope>test</includeScope>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>license-check</id>
+                            <goals>
+                                <goal>license-check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-maven-plugin</artifactId>
+                            <version>2.7.18</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <keepDependenciesWithProvidedScope>true</keepDependenciesWithProvidedScope>
+                        <createDependencyReducedPom>true</createDependencyReducedPom>
+                        <filters>
+                            <filter>
+                                <artifact>*:*</artifact>
+                                <excludes>
+                                    <exclude>META-INF/*.SF</exclude>
+                                    <exclude>META-INF/*.DSA</exclude>
+                                    <exclude>META-INF/*.RSA</exclude>
+                                </excludes>
+                            </filter>
+                        </filters>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                            <configuration>
+                                <transformers>
+                                    <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                        <resource>META-INF/spring.handlers</resource>
+                                    </transformer>
+                                    <transformer
+                                            implementation="org.springframework.boot.maven.PropertiesMergingResourceTransformer">
+                                        <resource>META-INF/spring.factories</resource>
+                                    </transformer>
+                                    <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                        <resource>META-INF/spring.schemas</resource>
+                                    </transformer>
+                                    <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                    <transformer
+                                            implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    </transformer>
+                                </transformers>
+                                <shadedArtifactAttached>true</shadedArtifactAttached>
+                                <minimizeJar>false</minimizeJar>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+    <packaging>pom</packaging>
+    <modules>
+        <module>device-shadow-api</module>
+        <module>device-shadow-entities</module>
+        <module>device-shadow-commons</module>
+    </modules>
+    <profiles>
+        <profile>
+            <id>dash</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.dash</groupId>
+                        <artifactId>license-tool-plugin</artifactId>
+                        <configuration>
+                            <skip>false</skip>
+                            <failWhenReviewNeeded>true</failWhenReviewNeeded>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <skipTests>true</skipTests>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>release</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.13</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.3.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>javadoc</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                                <configuration>
+                                    <release>${java.version}</release>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
