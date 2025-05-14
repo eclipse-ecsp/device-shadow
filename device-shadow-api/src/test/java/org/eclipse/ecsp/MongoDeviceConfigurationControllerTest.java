@@ -174,7 +174,7 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
         ResponseEntity<String> response =
             restTemplate.exchange("/v1/devices/HU0SCIUKMYXFG57/configuration?since=1497007300", HttpMethod.GET,
                 new HttpEntity<Object>(createHeaders()), String.class);
-        Assert.assertEquals("[]", response.getBody().toString());
+        Assert.assertEquals("[]", response.getBody());
     }
 
     /**
@@ -241,13 +241,12 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
      * @return HttpHeaders object with predefined headers.
      */
     private HttpHeaders createHeaders() {
-        HttpHeaders headers = new HttpHeaders() {
+        return new HttpHeaders() {
             {
                 set("AUTH-Token",
                         "U33LbcPogSlvfCjJbE8lzz9msUlhBUbFhtftBf6L4LvF-On46mHH0CbhIlK-nsLUj718uZeoHHP47uDIlLm3-agcuJ4v-A0rdeXZ5rlIJreBZ4WoRm1MDQjp0iIND3et");
                 set("Content-Type", "application/json");
             }
         };
-        return headers;
     }
 }

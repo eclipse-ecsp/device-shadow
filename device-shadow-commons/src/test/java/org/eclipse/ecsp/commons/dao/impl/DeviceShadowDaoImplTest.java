@@ -43,12 +43,13 @@ public class DeviceShadowDaoImplTest {
     private DeviceShadowDaoImpl deviceShadowDaoImpl;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
+        // do nothing
     }
 
     /**

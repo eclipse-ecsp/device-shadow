@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class JsonUtil {
      * @throws IOException - if an I/O error occurs while reading the file.
      */
     public static JsonNode convertToJsonNode(String fileName) throws IOException {
-        return OBJECT_MAPPER.readTree(IOUtils.toString(JsonUtil.class.getResourceAsStream(fileName), "UTF-8"));
+        return OBJECT_MAPPER.readTree(IOUtils.toString(JsonUtil.class.getResourceAsStream(fileName), StandardCharsets.UTF_8));
     }
 
     /**
@@ -65,7 +66,7 @@ public class JsonUtil {
      */
     @SuppressWarnings("rawtypes")
     public static Map convertToMap(String fileName) throws IOException {
-        return OBJECT_MAPPER.readValue(IOUtils.toString(JsonUtil.class.getResourceAsStream(fileName), "UTF-8"),
+        return OBJECT_MAPPER.readValue(IOUtils.toString(JsonUtil.class.getResourceAsStream(fileName), StandardCharsets.UTF_8),
             HashMap.class);
     }
 }
