@@ -567,6 +567,13 @@
             <version>1.6.4</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/kafka -->
+		<dependency>
+		    <groupId>org.testcontainers</groupId>
+		    <artifactId>kafka</artifactId>
+		    <version>1.21.0</version>
+		    <scope>test</scope>
+		</dependency>
     </dependencies>
     <build>
         <finalName>device-shadow-api</finalName>
