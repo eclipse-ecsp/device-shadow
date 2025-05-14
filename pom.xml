@@ -100,13 +100,13 @@
         <sonar.java.source>17</sonar.java.source>
         <sonar.language>java</sonar.language>
         <sonar.exclusions>
-            src/main/java/com/harman/device/shadow/entities/Configuration.java,
-            src/main/java/com/harman/device/shadow/AuthenticationException.java,
-            src/main/java/com/harman/device/shadow/AuthorizationException.java,
-            src/main/java/com/harman/device/shadow/NoSuchEntityException.java,
-            src/main/java/com/harman/device/shadow/commons/util/*.java,
-            src/main/java/com/harman/device/shadow/commons/constants/DeviceConfigConstants.java,
-            src/main/java/com/harman/device/shadow/commons/condition/*.java
+            **/entities/Configuration.java,
+            **/org/eclipse/ecsp/AuthenticationException.java,
+            **/org/eclipse/ecsp/AuthorizationException.java,
+            **/org/eclipse/ecsp/NoSuchEntityException.java,
+            **/org/eclipse/ecsp/commons/util/*.java,
+            **/org/eclipse/ecsp/commons/constants/DeviceConfigConstants.java,
+            **/org/eclipse/ecsp/commons/condition/*.java
         </sonar.exclusions>
         <jacoco.ut.execution.data.file>${project.build.directory}/coverage-reports/jacoco-ut.exec
         </jacoco.ut.execution.data.file>
@@ -496,17 +496,6 @@
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
-                    <configuration>
-                        <excludes>
-                            <exclude>org/eclipse/ecsp/entities/Configuration.java</exclude>
-                            <exclude>org/eclipse/ecsp/AuthenticationException.java</exclude>
-                            <exclude>org/eclipse/ecsp/AuthorizationException.java</exclude>
-                            <exclude>org/eclipse/ecsp/NoSuchEntityException.java</exclude>
-                            <exclude>org/eclipse/ecsp/commons/util/*</exclude>
-                            <exclude>org/eclipse/ecsp/commons/constants/DeviceConfigConstants.java</exclude>
-                            <exclude>org/eclipse/ecsp/commons/condition/*</exclude>
-                        </excludes>
-                    </configuration>
                     <executions>
                         <!-- Prepares the property pointing to the JaCoCo runtime
                             agent which is passed as VM argument when Maven the Surefire plugin is executed. -->

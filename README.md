@@ -1,8 +1,10 @@
 [<img src="./images/logo.png" width="300" height="150"/>](logo.png)
 
-[![Build](../../actions/workflows/maven-build.yml/badge.svg)](../../actions/workflows/maven-build.yml)
-[![License Compliance](../../actions/workflows/license-compliance.yml/badge.svg)](../../actions/workflows/license-compliance.yml)
-[![Documentation](../../actions/workflows/documentation.yml/badge.svg)](../../actions/workflows/documentation.yml)
+[![Maven Build & Sonar Analysis](https://github.com/eclipse-ecsp/device-shadow/actions/workflows/maven-build.yml/badge.svg)](https://github.com/eclipse-ecsp/device-shadow/actions/workflows/maven-build.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_device-shadow&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_device-shadow)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=eclipse-ecsp_device-shadow&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=eclipse-ecsp_device-shadow)
+[![License Compliance](https://github.com/eclipse-ecsp/device-shadow/actions/workflows/licence-compliance.yaml/badge.svg)](https://github.com/eclipse-ecsp/device-shadow/actions/workflows/licence-compliance.yaml)
+[![Latest Release](https://img.shields.io/github/v/release/eclipse-ecsp/device-shadow?sort=semver)](https://github.com/eclipse-ecsp/device-shadow/releases)
 
 # Device Shadow
 Device-shadow component is responsible to provide ability to device to resync its configuration, especially when it was disconnected or its configuration is found to be corrupted.
