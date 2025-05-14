@@ -21,6 +21,7 @@
 package org.eclipse.ecsp.commons.dao.impl;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +62,7 @@ public class DeviceShadowDaoImplTest {
         DeviceShadowDaoImpl test = new DeviceShadowDaoImpl();
         DeviceShadowDaoImpl spyTest = Mockito.spy(test);
         Mockito.doReturn(new ArrayList<>()).when(spyTest).find(Mockito.any());
-        spyTest.findByPdidAndPayloadTimeStampGreaterThan(pdid, TIMESTAMP);
+        Assert.assertEquals(0, spyTest.findByPdidAndPayloadTimeStampGreaterThan(pdid, TIMESTAMP).size());
     }
 
     /**
@@ -76,5 +77,6 @@ public class DeviceShadowDaoImplTest {
         DeviceShadowDaoImpl spyTest = Mockito.spy(test);
         Mockito.doReturn(new ArrayList<>()).when(spyTest).find(Mockito.any());
         spyTest.findByPdidAndUploadTimeStampGreaterThanEqual(pdid, TIMESTAMP);
+        Assert.assertEquals(0, spyTest.findByPdidAndPayloadTimeStampGreaterThan(pdid, TIMESTAMP).size());
     }
 }

@@ -44,12 +44,10 @@
     </parent>
     <artifactId>device-shadow-commons</artifactId>
     <dependencies>
-        <!-- Child Module dependencies -->
         <dependency>
             <groupId>org.eclipse.ecsp</groupId>
             <artifactId>device-shadow-entities</artifactId>
         </dependency>
-        <!-- Ignite common library dependencies -->
         <dependency>
             <groupId>org.eclipse.ecsp</groupId>
             <artifactId>nosql-dao</artifactId>
@@ -60,28 +58,21 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Third party jar dependencies -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.17.0</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>1.20.4</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.4.0</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,24 +82,15 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
-            <version>3.6.1</version>
+            <version>${commons-math3.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>3.1.0</version>
-            <scope>compile</scope>
-        </dependency>
+		    <groupId>jakarta.validation</groupId>
+		    <artifactId>jakarta.validation-api</artifactId>
+		</dependency>
     </dependencies>
-    <!-- To download third party dependencies from non public repository -->
     <build>
         <plugins>
-            <!--  JaCoCo Maven plugin to generate a code coverage report for a Java project -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>

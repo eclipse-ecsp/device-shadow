@@ -76,7 +76,7 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
      * @throws Exception if an error occurs during the test.
      */
     @Test
-    public void testApiConfig() throws Exception {
+    public void testApiConfigV1() throws Exception {
         prepareData();
         ResponseEntity<String> response =
             restTemplate.exchange("/v1/devices/HU0SCIUKMYXFG9/configuration?since=1497007300", HttpMethod.GET,
@@ -94,9 +94,60 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
             IOUtils.toString(JsonUtil.class.getResourceAsStream("/device-config-expected-result.json"), "UTF-8");
         JSONAssert.assertEquals(expectedData.trim(), response.getBody().trim(), false);
     }
+    
+    /**
+     * Tests the API configuration endpoint for retrieving device configuration data.
+     *
+     * <p>This test performs the following steps:
+     * <ul>
+     *   <li>Prepares the necessary test data using the {@code prepareData()} method.</li>
+     *   <li>Sends an HTTP GET request to the endpoint 
+     *       {@code /devices/HU0SCIUKMYXFG9/configuration?since=1497007300} 
+     *       using a {@code RestTemplate}.</li>
+     *   <li>Parses the response body into a list using Jackson's {@code ObjectMapper}.</li>
+     *   <li>Validates that the response and its body are not null.</li>
+     *   <li>Asserts that the size of the parsed list matches the expected test map size.</li>
+     *   <li>Compares the response body with an expected JSON result stored in a resource file 
+     *       {@code /device-config-expected-result.json} using {@code JSONAssert}.</li>
+     * </ul>
+     * 
+     * @throws Exception if any error occurs during the test execution.
+     */
+    @Test
+    public void testApiConfig() throws Exception {
+        prepareData();
+        ResponseEntity<String> response =
+            restTemplate.exchange("/devices/HU0SCIUKMYXFG9/configuration?since=1497007300", HttpMethod.GET,
+                new HttpEntity<Object>(createHeaders()), String.class);
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        Assert.assertNotNull(response);
+        Assert.assertNotNull(response.getBody());
+        List dataList = (List) objectMapper.readValue(response.getBody().getBytes(), List.class);
+
+        Assert.assertNotNull(dataList);
+        Assert.assertEquals(TEST_MAP_SIZE, dataList.size());
+
+        final String expectedData =
+            IOUtils.toString(JsonUtil.class.getResourceAsStream("/device-config-expected-result.json"), "UTF-8");
+        JSONAssert.assertEquals(expectedData.trim(), response.getBody().trim(), false);
+    }
 
     /**
-     * Test case to verify the behavior when an invalid authentication token is used in the API configuration.
+     * Test case to validate the behavior of the API when an invalid authentication
+     * token is provided in the request headers. This test ensures that the API
+     * handles invalid tokens gracefully and does not allow unauthorized access.
+     *
+     * <p>Steps:
+     * <ol>
+     *   <li>Create HTTP headers with an invalid "AUTH-Token".</li>
+     *   <li>Send a GET request to the device configuration endpoint with the invalid token.</li>
+     *   <li>Verify that an exception is thrown, indicating the request was not authorized.</li>
+     * </ol>
+     *
+     * <p>Expected Outcome:
+     * The test should pass if an exception is thrown, confirming that the API
+     * rejects requests with invalid authentication tokens.
      */
     @Test
     public void testInvalidAuthTokenApiConfig() {
@@ -137,7 +188,7 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
             restTemplate.exchange("/v1.1/devices/HU0SCIUKMYXFG10/configuration?since=1497007300", HttpMethod.GET,
                 new HttpEntity<Object>(createHeaders()), ExceptionResponse.class);
         Assert.assertNotNull(response);
-        Assert.assertEquals(response.getBody().getCode(), HttpStatus.BAD_REQUEST.value());
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     /**
@@ -150,8 +201,7 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
             restTemplate.exchange("/v1/devices/HU0SCIUKMYXFG10/configuration?since=1497007300F", HttpMethod.GET,
                 new HttpEntity<Object>(createHeaders()), ExceptionResponse.class);
         Assert.assertNotNull(response);
-        Assert.assertEquals(response.getBody().getCode(), HttpStatus.BAD_REQUEST.value());
-
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     /**
@@ -163,7 +213,7 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
             restTemplate.exchange("/v1/devices/(null)/configuration?since=1497007300", HttpMethod.GET,
                 new HttpEntity<Object>(createHeaders()), ExceptionResponse.class);
         Assert.assertNotNull(response);
-        Assert.assertEquals(response.getBody().getCode(), HttpStatus.BAD_REQUEST.value());
+        Assert.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         Assert.assertEquals(DeviceConfigConstants.INVALID_DEVICE_ID_MSG, response.getBody().getDescription());
     }
 
@@ -174,7 +224,7 @@ public class MongoDeviceConfigurationControllerTest extends CommonTestBase {
      * The test data is converted to a map using the JsonUtil.convertToMap method.
      */
     private void prepareData() throws IOException {
-
+        deviceShadowDaoImpl.deleteAll();
         deviceShadowDaoImpl.save(
             new Configuration("HU0SCIUKMYXFG9", TIMESTAMP_1, JsonUtil.convertToMap("/testData-Geofence.json")));
         deviceShadowDaoImpl.save(

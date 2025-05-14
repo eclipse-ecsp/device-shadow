@@ -79,7 +79,7 @@ public class DeviceConfigurationController {
         responses = { @ApiResponse(responseCode = "200", description = "Success",
                 content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                 array = @ArraySchema(schema = @Schema(implementation = Configuration.class))))})
-    @SecurityRequirement(name = Security.JWT_AUTH_VALIDATOR, scopes = {"dongle,hu,tcu,Dongle,dashcam"})
+    @SecurityRequirement(name = "JwtAuthValidator", scopes = {"dongle,hu,tcu,Dongle,dashcam"})
     public List<Map> getConfigurationV1(@ApiVersion1 @PathVariable("apiVersion") String apiVersion,
                                       @ValidDeviceId @PathVariable("deviceId") String deviceId,
                                       @RequestParam(value = "since", required = true) @Valid @Pattern(
@@ -109,7 +109,7 @@ public class DeviceConfigurationController {
             responses = { @ApiResponse(responseCode = "200", description = "Success",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             array = @ArraySchema(schema = @Schema(implementation = Configuration.class))))})
-    @SecurityRequirement(name = Security.JWT_AUTH_VALIDATOR, scopes = {"dongle,hu,tcu,Dongle,dashcam"})
+    @SecurityRequirement(name = "JwtAuthValidator", scopes = {"dongle,hu,tcu,Dongle,dashcam"})
     public List<Map> getConfiguration(@ValidDeviceId @PathVariable("deviceId") String deviceId,
                                       @RequestParam(value = "since", required = true) @Valid @Pattern(
                                               message = "Invalid Timestamp", regexp = "[0-9]+") String since) {
