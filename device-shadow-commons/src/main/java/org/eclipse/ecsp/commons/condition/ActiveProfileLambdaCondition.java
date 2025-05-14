@@ -49,9 +49,8 @@ public class ActiveProfileLambdaCondition implements Condition {
         boolean flag = false;
         if (context.getEnvironment().getActiveProfiles().length > 0) {
             String activeProfile = context.getEnvironment().getActiveProfiles()[0];
-            if (context.getEnvironment().containsProperty(DeviceConfigConstants.API_EXECUTION_ENV_PROP)
-                && context.getEnvironment().getProperty(DeviceConfigConstants.API_EXECUTION_ENV_PROP)
-                    .equals(DeviceConfigConstants.LAMBDA)) {
+            String apiExeEnv = context.getEnvironment().getProperty(DeviceConfigConstants.API_EXECUTION_ENV_PROP);
+            if (apiExeEnv != null && apiExeEnv.equals(DeviceConfigConstants.LAMBDA)) {
                 flag = true;
                 LOGGER.info("ActiveProfileLambdaCondition set with active profile {}", activeProfile);
             }

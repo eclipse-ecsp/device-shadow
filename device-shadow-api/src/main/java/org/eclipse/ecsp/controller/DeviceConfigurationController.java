@@ -32,7 +32,6 @@ import org.eclipse.ecsp.commons.annotation.ApiVersion1;
 import org.eclipse.ecsp.commons.annotation.ValidDeviceId;
 import org.eclipse.ecsp.entities.Configuration;
 import org.eclipse.ecsp.security.HeaderContext;
-import org.eclipse.ecsp.security.Security;
 import org.eclipse.ecsp.security.UserDetails;
 import org.eclipse.ecsp.service.DeviceConfigurationService;
 import org.eclipse.ecsp.utils.logger.IgniteLogger;
@@ -83,7 +82,7 @@ public class DeviceConfigurationController {
     public List<Map> getConfigurationV1(@ApiVersion1 @PathVariable("apiVersion") String apiVersion,
                                       @ValidDeviceId @PathVariable("deviceId") String deviceId,
                                       @RequestParam(value = "since", required = true) @Valid @Pattern(
-                                          message = "Invalid Timestamp", regexp = "[0-9]+") String since) {
+                                          message = "Invalid Timestamp", regexp = "\\d+") String since) {
         UserDetails userContext = HeaderContext.getUserDetails();
         if (userContext != null) {
             LOGGER.info("user details -> userId: {}, scope: {}", userContext.getUserId(),
@@ -112,7 +111,7 @@ public class DeviceConfigurationController {
     @SecurityRequirement(name = "JwtAuthValidator", scopes = {"dongle,hu,tcu,Dongle,dashcam"})
     public List<Map> getConfiguration(@ValidDeviceId @PathVariable("deviceId") String deviceId,
                                       @RequestParam(value = "since", required = true) @Valid @Pattern(
-                                              message = "Invalid Timestamp", regexp = "[0-9]+") String since) {
+                                              message = "Invalid Timestamp", regexp = "\\d+") String since) {
         UserDetails userContext = HeaderContext.getUserDetails();
         if (userContext != null) {
             LOGGER.info("user details -> userId: {}, scope: {}", userContext.getUserId(),

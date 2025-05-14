@@ -42,12 +42,9 @@ public class ObjectUtils {
      */
     public static <T> T requireNonEmpty(T obj, String errorMsg) {
         Objects.requireNonNull(obj, errorMsg);
-        if (obj instanceof String) {
-            String str = (String) obj;
-            if (str.isEmpty()) {
+        if (obj instanceof String str && str.isEmpty()) {
                 throw new RuntimeException(errorMsg);
             }
-        }
         return obj;
     }
 }
