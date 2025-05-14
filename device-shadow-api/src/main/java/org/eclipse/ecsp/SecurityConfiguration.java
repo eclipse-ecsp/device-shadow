@@ -20,25 +20,61 @@
 
 package org.eclipse.ecsp;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.SecurityFilterChain;
+
 
 /**
- * This class represents the security configuration for the application.
- * It extends the {@link WebSecurityConfigurerAdapter} class to provide custom security configurations.
+ * SecurityConfiguration class is responsible for configuring the security settings
+ * of the application. It defines the security filter chain to manage HTTP security.
+ *
+ * <p>This configuration allows all incoming HTTP requests without any restrictions.
+ * It uses Spring Security's {@link HttpSecurity} to define the security rules and
+ * builds a {@link SecurityFilterChain} instance.
+ *
+ * <p>Key Features:
+ * <ul>
+ *   <li>Permits all incoming HTTP requests.</li>
+ *   <li>Provides a customizable security filter chain.</li>
+ * </ul>
+ *
+ * <p>Usage:
+ * <pre>
+ * &#64;Configuration
+ * public class SecurityConfiguration {
+ *     &#64;Bean
+ *     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+ *         // Security configuration logic
+ *     }
+ * }
+ * </pre>
+ *
+ * @see HttpSecurity
+ * @see SecurityFilterChain
  */
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
 
+    
     /**
-        * Configures the security settings for the application.
-        *
-        * @param httpSecurity the HttpSecurity object used to configure security
-        * @throws Exception if an error occurs while configuring security
-        */
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests().antMatchers("/").permitAll();
+     * Configures the security filter chain for the application.
+     *
+     * <p>This method sets up the HTTP security configuration to allow all requests
+     * without any restrictions. It uses the {@link HttpSecurity} object to define
+     * the security rules and builds the filter chain.
+     *
+     * @param http the {@link HttpSecurity} object used to configure security settings
+     * @return the configured {@link SecurityFilterChain} instance
+     * @throws Exception if an error occurs while configuring the security filter chain
+     */
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz ->
+                authz.anyRequest().permitAll()
+        );
+        return http.build();
     }
 }
