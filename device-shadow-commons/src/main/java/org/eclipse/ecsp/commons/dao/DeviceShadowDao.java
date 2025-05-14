@@ -23,12 +23,13 @@ package org.eclipse.ecsp.commons.dao;
 import org.eclipse.ecsp.entities.Configuration;
 import org.eclipse.ecsp.nosqldao.IgniteBaseDAO;
 
+
 /**
- * The DeviceShadowDao interface represents a data access object for managing device shadow configurations.
- * It extends the IgniteBaseDAO interface and provides methods for CRUD operations on device shadow configurations.
- *
- * @param <String>         the type of the key used for device shadow configurations
- * @param <Configuration>  the type of the device shadow configuration
+ * The {@code DeviceShadowDao} interface extends the {@link IgniteBaseDAO} interface
+ * to provide data access operations for managing device shadow configurations.
+ * 
+ * <p>This interface is intended to interact with an Ignite-based data store for
+ * performing CRUD operations and other data management tasks related to device shadows.
  */
 public interface DeviceShadowDao extends IgniteBaseDAO<String, Configuration> {
 }
