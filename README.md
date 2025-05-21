@@ -27,7 +27,6 @@ Device-shadow component is responsible to provide ability to device to resync it
 * [Announcements](#announcements)
 * [Acknowledgments](#acknowledgments)
 
-
 ## Getting Started
 
 Device Shadow component exposes API that the Device Client can use to resync its configuration, especially when it got disconnected or its configuration is found to be corrupted.
@@ -47,12 +46,11 @@ The list of tools required to build and run the project:
 
 ### Installation
 
-[Install Java 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk#zulu)
+- [Install Java 17](https://www.azul.com/downloads/?version=java-17-lts&package=jdk#zulu)
 
-[How to set up Maven](https://maven.apache.org/install.html)
+- [How to set up Maven](https://maven.apache.org/install.html)
 
-Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) / [Podman](https://podman.io/)
-
+- Install Docker on your machine by referring to official Docker documnentation to have a Container environment.
 
 ### Coding style check configuration
 
