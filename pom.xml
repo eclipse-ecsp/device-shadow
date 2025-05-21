@@ -40,7 +40,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.eclipse.ecsp</groupId>
     <artifactId>device-shadow</artifactId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
 
     <name>device-shadow</name>
     <description>Device shadow library for ECSP project</description>
@@ -64,6 +64,11 @@
             <id>dileephemachandranharman</id>
             <name>Dileep Hemachandran</name>
             <email>dileep.hemachandran@harman.com</email>
+        </developer>
+        <developer>
+            <id>akshaymathur-harman</id>
+            <name>Akshay Mathur</name>
+            <email>akshay.mathur@harman.com</email>
         </developer>
     </developers>
 
