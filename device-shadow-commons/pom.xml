@@ -40,9 +40,14 @@
     <parent>
         <groupId>org.eclipse.ecsp</groupId>
         <artifactId>device-shadow</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
     <artifactId>device-shadow-commons</artifactId>
+
+    <name>device-shadow-commons</name>
+    <description>Device shadow library for ECSP project</description>
+    <url>https://github.com/eclipse-ecsp/device-shadow</url>
+
     <dependencies>
         <dependency>
             <groupId>org.eclipse.ecsp</groupId>
